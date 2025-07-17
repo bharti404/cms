@@ -1,0 +1,70 @@
+.subscription-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.subscription-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+/* example logos via background-image or just add emojis/images */
+.logo-circle.spotify {
+  background: url('https://cdn-icons-png.flaticon.com/512/174/174872.png') no-repeat center/contain;
+}
+.logo-circle.google {
+  background: url('https://cdn-icons-png.flaticon.com/512/300/300221.png') no-repeat center/contain;
+}
+.logo-circle.slack {
+  background: url('https://cdn-icons-png.flaticon.com/512/2111/2111615.png') no-repeat center/contain;
+}
+.logo-circle.airbnb {
+  background: url('https://cdn-icons-png.flaticon.com/512/2111/2111628.png') no-repeat center/contain;
+}
+
+.status {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.status.success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status.warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.status.danger {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.price-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-row button {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}

@@ -1,0 +1,16 @@
+.pie-chart {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+  background: conic-gradient(
+    #f7931a 0% 20%,    /* BTC */
+    #25aae1 20% 30%,   /* XRP */
+    #3cc8c8 30% 70%,   /* ADA */
+    #627eea 70% 100%   /* ETH */
+  );
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+ 
+
+}

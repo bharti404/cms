@@ -1,0 +1,20 @@
+.calendar-wrapper {
+  padding: 30px;
+  background-color: #f9f9f9;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 24px;
+  font-weight: 500;
+}

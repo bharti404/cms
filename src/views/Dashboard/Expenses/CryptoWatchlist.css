@@ -1,0 +1,153 @@
+.watchlist {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  margin: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.watchlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.watchlist-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.watchlist-header p {
+  margin: 4px 0 0;
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.view-toggle .btn {
+  border: none;
+  background: #f3f4f6;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.view-toggle .btn.selected {
+  background: #d1fae5;
+  color: #059669;
+}
+
+.crypto-cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.crypto-card {
+  flex: 1;
+  min-width: 280px;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.crypto-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crypto-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crypto-icon {
+  font-size: 1.8rem;
+}
+
+.crypto-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.crypto-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.tag {
+  background: #e5e7eb;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.price-info h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.change {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.change.positive {
+  color: #16a34a;
+}
+
+.change.negative {
+  color: #dc2626;
+}
+
+.sparkline {
+  margin-top: 10px;
+}
+
+.more-assets-btn {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.more-assets-btn button {
+  padding: 10px 20px;
+  background: #1d4ed8;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.more-assets-btn button:hover {
+  background: #2563eb;
+}

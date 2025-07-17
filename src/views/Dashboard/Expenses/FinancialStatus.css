@@ -1,0 +1,88 @@
+.financial-status-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.financial-cards {
+  width: 280px;
+  background: linear-gradient(to bottom right, #5f4b8b, #7b68ee);
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: white;
+}
+
+.income-card,
+.expense-card {
+  background-color: #fff;
+  color: black;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.income-amount {
+  color: #4CAF50;
+  font-size: 22px;
+  margin: 0;
+}
+
+.expense-amount {
+  color: #f44336;
+  font-size: 22px;
+  margin: 0;
+}
+
+.label {
+  font-size: 14px;
+  color: #555;
+}
+
+.income-graph {
+  height: 60px;
+  background: linear-gradient(to top, #4CAF50, #a5d6a7);
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.expense-graph {
+  height: 60px;
+  background: linear-gradient(to top, #f44336, #ef9a9a);
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.financial-chart-section {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+}
+
+.chart-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.chart-header p {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.download-btn {
+  margin-top: 20px;
+  background-color: #1976d2;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}

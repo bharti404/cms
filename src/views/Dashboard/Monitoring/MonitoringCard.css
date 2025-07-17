@@ -1,0 +1,73 @@
+/* src/pages/Dashboard/Monitoring/MonitoringStatsCard.css */
+
+.monitoring-stats-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  flex: 1;
+  min-width: 280px;
+}
+
+.monitoring-stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.monitoring-stats-icon {
+  padding: 12px;
+  border-radius: 8px;
+  display: inline-flex;
+  color: white;
+  font-size: 44px;
+}
+
+.monitoring-stats-change {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #f4f6f8;
+  color: #555;
+}
+
+.monitoring-stats-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 12px 0 6px 0;
+  
+}
+
+.monitoring-stats-desc {
+  font-size: 13px;
+  color: #6b6f82;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.monitoring-stats-button {
+  margin-top: 12px;
+  padding: 6px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 1px solid #4a90e2;
+  background: white;
+  color: #4a90e2;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.monitoring-stats-button:hover {
+  background-color: #4a90e2;
+  color: white;
+}
+
+/* Responsive layout if sidebar collapses or on smaller screens */
+@media (max-width: 768px) {
+  .monitoring-stats-card {
+    width: 100%;
+    
+  }
+}

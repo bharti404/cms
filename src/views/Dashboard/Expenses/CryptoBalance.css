@@ -1,0 +1,66 @@
+.balance-container {
+  width: 320px;
+  padding-right: 20px;
+  border-right: 1px solid #eee;
+}
+
+.balance-title {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.balance-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #2d2d2d;
+}
+
+.btc-amount {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 15px;
+}
+
+.change-wrapper {
+  margin: 15px 0;
+}
+
+.change-box {
+  display: inline-block;
+  background-color: #d1f3d5;
+  color: #1e7e34;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+
+.change-label {
+  font-size: 12px;
+  color: #777;
+  margin-top: 5px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.send-btn, .receive-btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid #007bff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.send-btn {
+  background-color: white;
+  color: #007bff;
+}
+
+.receive-btn {
+  background-color: #007bff;
+  color: white;
+}

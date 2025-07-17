@@ -1,0 +1,110 @@
+.health-status-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.health-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.historical-btn {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.health-body {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.progress-circle {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.score-text h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.out-of {
+  font-size: 18px;
+  color: #999;
+}
+
+.test-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.test-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.ok {
+  color: green;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fail {
+  color: red;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.health-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.check-again {
+  background: #006CFF;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  border-radius: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.check-again:hover {
+  background: #004ecb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .health-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

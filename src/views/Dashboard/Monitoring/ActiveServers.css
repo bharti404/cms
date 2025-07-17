@@ -1,0 +1,78 @@
+.active-servers-container {
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.server-list {
+  flex: 1;
+  min-width: 280px;
+}
+
+.server-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.flag {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.info {
+  flex: 1;
+}
+
+.info p {
+  font-size: 13px;
+  color: #777;
+}
+
+.status {
+  text-align: right;
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.status-chip.active {
+  background-color: #e6f4ea;
+  color: green;
+}
+
+.status-chip.provisioning {
+  background-color: #fff5e0;
+  color: #d18800;
+}
+
+.status-chip.high-risk {
+  background-color: #fef2f2;
+  color: red;
+}
+
+.bar-chart-section {
+  flex: 2;
+  min-width: 320px;
+}
+
+.alert-box {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}

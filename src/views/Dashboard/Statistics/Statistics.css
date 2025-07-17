@@ -1,0 +1,17 @@
+.statistics {
+  padding: 24px;
+  background-color: #f9f9f9;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.profile-products-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}

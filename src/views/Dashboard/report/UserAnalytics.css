@@ -1,0 +1,102 @@
+.user-analytics {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.analytics-header h4 {
+  color: gray;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.analytics-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.status-btn {
+  background-color: #fff6ea;
+  border: 1px solid #f0c180;
+  border-radius: 5px;
+  color: #d68f00;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  font-weight: bold;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.user-info {
+  flex-grow: 1;
+}
+
+.user-info h5 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.user-info span {
+  font-size: 0.85rem;
+  color: gray;
+}
+
+.progress-bar {
+  background-color: #dce6f1;
+  height: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.progress-fill {
+  background-color: #0d6efd;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.progress-meta {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 50px;
+}
+
+.progress-meta span {
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.view-btn {
+  padding: 5px 10px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}

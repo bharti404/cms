@@ -1,0 +1,60 @@
+.weekly-sales {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.weekly-sales h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #666;
+}
+
+.weekly-sales p {
+  margin: 5px 0 10px;
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.weekly-sales h2 {
+  font-size: 2rem;
+  margin: 10px 0 20px;
+}
+
+.category-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.category-stats .bar {
+  display: inline-block;
+  width: 35px;
+  height: 5px;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+.red { background-color: red; }
+.green { background-color: green; }
+.orange { background-color: orange; }
+
+.chart-placeholder {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to top, #e0f0ff, #ffffff);
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.report-btn {
+  background-color: white;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}

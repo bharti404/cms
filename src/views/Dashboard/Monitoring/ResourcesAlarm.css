@@ -1,0 +1,43 @@
+.resources-alarm {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.alarm-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.diagnose-btn {
+  padding: 6px 12px;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  border: none;
+}
+
+.chart-area {
+  margin-top: 10px;
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bar {
+  height: 8px;
+  background: linear-gradient(to right, #6db8ff, #007bff);
+  border-radius: 6px;
+}
+
+.alert-msg {
+  margin-top: 15px;
+  color: red;
+  font-size: 0.9rem;
+}
