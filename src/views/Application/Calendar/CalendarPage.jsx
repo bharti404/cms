@@ -3,6 +3,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+
+import listPlugin from '@fullcalendar/list';
 import './CalendarPage.css'; // custom styles
 
 const CalendarPage = () => {
@@ -35,13 +37,24 @@ const CalendarPage = () => {
       <h2>Calendar</h2>
       <p>Organize your schedule and events</p>
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        editable={true}
-        selectable={true}
-        events={events}
-        height="auto"
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek' // These are the 4 tabs
+          }}
+          views={{
+            dayGridMonth: { buttonText: 'Month' },
+            timeGridWeek: { buttonText: 'Week' },
+            timeGridDay: { buttonText: 'Day' },
+            listWeek: { buttonText: 'Agenda' }
+          }}
+          events={events}
+          selectable={true}
+          editable={true}
       />
+
     </div>
   );
 };

@@ -40,3 +40,12 @@
 .css-7blk3r-MuiButtonBase-root-MuiButton-root {
   color: $textDarkDark !important;
 }
+
+
+@media (forced-colors: active) {
+  .ps__thumb-x,
+  .ps__thumb-y {
+    background-color: CanvasText !important;
+    border: 1px solid CanvasText !important;
+  }
+}

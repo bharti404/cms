@@ -1,17 +1,11 @@
 
 
-
-
-
-
 import React, { lazy } from 'react';
 
 // project import
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../component/Loadable';
-import Reports from '../views/Dashboard/report/Reports';  // ✅ Already imported
 
-const Expenses = Loadable(lazy(() => import('views/Dashboard/Expenses/CryptoDashboard')));
 
 
 
@@ -19,9 +13,16 @@ const Expenses = Loadable(lazy(() => import('views/Dashboard/Expenses/CryptoDash
 const DashboardDefault = Loadable(lazy(() => import('views/Dashboard/Default')));
 const UtilsTypography = Loadable(lazy(() => import('views/Utils/Typography')));
 
+const Expenses = Loadable(lazy(() => import('views/Dashboard/Expenses/CryptoDashboard')));
 const SamplePage = Loadable(lazy(() => import('views/Application')));
 const Monitoring = Loadable(lazy(() => import('views/Dashboard/Monitoring/Monitoring')));
 const Statistics = Loadable(lazy(() => import('views/Dashboard/Statistics/Statistics')));
+
+const Reports = Loadable(lazy(() => import('views/Dashboard/report/Reports')));  // ✅
+
+// Application Lazy imports 
+
+const Calendar = Loadable(lazy(() => import('views/Application/Calendar/CalendarPage')));
 
 // ==============================|| MAIN ROUTES ||============================== //
 
@@ -60,7 +61,13 @@ const MainRoutes = {
       path: '/dashboard/statistics',   // ✅ New Statistics Route
       element: <Statistics />
     },
-    
+
+
+    // Applications
+    {
+      path: '/applications/Calendar',
+      element: <Calendar />
+    }
 
   ]
 };
