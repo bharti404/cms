@@ -128,6 +128,38 @@ export default {
                         }
                       ]
 
+                    },
+
+                     {
+                      id : "account",
+                      title: "Accounting",
+                      type: "collapse",
+                      icon: icons['AppsOutlinedIcon'],
+                      children: [ 
+
+                        {
+                        id: "invoice" ,
+                        title: "Invoice",
+                        type: "item",
+                        url: '/accounting/invoice',
+                        icon :  icons["CalendarMonthOutlinedIcon"]
+                        },
+                        {
+                          id:"File manager",
+                          title: "File manager",
+                          type: "item",
+                          url: '/Applications/File manager',
+                          icon : icons["FolderOpenOutlinedIcon"],
+                        },
+                        {
+                          id :"Mailbox",  
+                          title: "Mailbox",
+                          type: "item",
+                          url: '/Applications/Mailbox',
+                          icon : icons["MailOutlineOutlinedIcon"],
+                        }
+                      ]
+
                     }
                   ]
 
