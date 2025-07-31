@@ -19,9 +19,13 @@ import {
 } from "@mui/material";
 import { FaEye } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
-import { useState } from "react";
+import { useState  ,useRef ,useEffect} from "react";
 import { RxCross2 } from "react-icons/rx";
 import CreateInvoice from "./CreateInvoice";
+import TestingUI from "./TestingUI";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 
 const rows = [
   {
@@ -59,6 +63,33 @@ const category = [
 function Invoice() {
   const [openCategoryDropdown, setOpenCategoryDropDown] = useState(false);
   const [selectCategory, setSelectCategory] = useState("");
+  const [showInvoice , setShowInvoice] = useState(false);
+  const [renderForDownload, setRenderForDownload] = useState(false);
+const pdfRef = useRef();
+
+
+useEffect(() => {
+  if (renderForDownload && pdfRef.current) {
+    // Wait briefly to ensure it's mounted
+    setTimeout(() => {
+      html2canvas(pdfRef.current, { scale: 2 }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("invoice.pdf");
+
+        setRenderForDownload(false); // remove the hidden render
+      });
+    }, 300);
+  }
+}, [renderForDownload]);
+
+
+   
 
   const handleOpenDropDown = () => {
     setOpenCategoryDropDown(true);
@@ -68,6 +99,31 @@ function Invoice() {
     setOpenCategoryDropDown(false);
     setSelectCategory("")
   };
+
+const handleDownloadPdf = () => {
+  setTimeout(() => {
+    const input = document.getElementById("pdf-content");
+
+    if (!input) {
+      console.error("PDF content not found!");
+      return;
+    }
+
+    html2canvas(input, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("invoice.pdf");
+    });
+  }, 300); // wait 300ms to ensure Modal and DOM content is fully rendered
+};
+
+
   return (
     <div>
       <Stack
@@ -116,10 +172,15 @@ function Invoice() {
 
                 <TableCell>{row.postCode}</TableCell>
                 <TableCell>{row.data}</TableCell>
-                <TableCell sx={{ fontSize: "16px" }}>{<FaEye />}</TableCell>
-                <TableCell sx={{ fontSize: "20px" }}>
-                  {<MdDownload />}
+                <TableCell sx={{ fontSize: "16px" }}> <Button onClick={()=>setShowInvoice(true)}>{<FaEye />}</Button></TableCell>
+
+                <TableCell >
+                 <Button onClick={() => setRenderForDownload(true)}>
+  <MdDownload style={{fontSize:"20px"}} />
+</Button>
+
                 </TableCell>
+               
               </TableRow>
             ))}
           </TableBody>
@@ -233,6 +294,52 @@ function Invoice() {
     </Box>
   </Modal>
 )}
+
+
+    {showInvoice && (
+  <Modal
+    open={showInvoice}
+    onClose={()=>setShowInvoice(false)}
+    BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.4)" } }}
+  >
+    <Box
+      sx={{
+        position: "absolute",
+        top: "5%", // move it closer to top (not 50%)
+        left: "50%",
+        transform: "translateX(-50%)", // only center horizontally
+        width: "80%",
+        maxHeight: "90vh", // restrict height
+        bgcolor: "white",
+        borderRadius: "8px",
+        boxShadow: "0 8px 25px rgba(0,0,0,0.4)",
+        p: 3,
+        overflowY: "auto" // add vertical scroll if needed
+      }}
+    >
+  <div id="pdf-content">
+        <TestingUI />
+      </div>
+    </Box>
+  </Modal>
+)}
+
+
+{renderForDownload && (
+  <div
+    ref={pdfRef}
+    style={{
+      position: "absolute",
+      left: "-9999px", // Hide off-screen
+      top: 0,
+    }}
+  >
+    <TestingUI />
+  </div>
+)}
+
+
+
 
     </div>
   );
