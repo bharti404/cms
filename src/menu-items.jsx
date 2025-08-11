@@ -51,84 +51,84 @@ export default {
         type: 'group',
         icon: icons['NavigationOutlinedIcon'],
         children: [
-                    {
-                      id: 'dashboard',
-                      title: 'Dashboard',
-                      type: 'collapse', // changed from 'item' to 'collapse'
-                      icon: icons['HomeOutlinedIcon'],
-                      children: [
-                        {
-                          id: 'dashboard-default',
-                          title: 'Default',
-                          type: 'item',
-                          url: '/dashboard/default',
-                          icon: icons['HomeOutlinedIcon']
-                        },
-                        {
-                          id: 'dashboard-reports',
-                          title: 'Reports',
-                          type: 'item',
-                          url: '/dashboard/reports',
-                          icon: icons['ChromeReaderModeOutlinedIcon'] // optional icon
-                        },
-                        {
-                          id: 'monitoring',
-                          title: 'Monitoring',
-                          type: 'item',
-                          url: '/dashboard/monitoring',
-                          icon: icons['MonitorHeartOutlinedIcon']
+                    // {
+                    //   id: 'dashboard',
+                    //   title: 'Dashboard',
+                    //   type: 'collapse', // changed from 'item' to 'collapse'
+                    //   icon: icons['HomeOutlinedIcon'],
+                    //   children: [
+                    //     {
+                    //       id: 'dashboard-default',
+                    //       title: 'Default',
+                    //       type: 'item',
+                    //       url: '/dashboard/default',
+                    //       icon: icons['HomeOutlinedIcon']
+                    //     },
+                    //     {
+                    //       id: 'dashboard-reports',
+                    //       title: 'Reports',
+                    //       type: 'item',
+                    //       url: '/dashboard/reports',
+                    //       icon: icons['ChromeReaderModeOutlinedIcon'] // optional icon
+                    //     },
+                    //     {
+                    //       id: 'monitoring',
+                    //       title: 'Monitoring',
+                    //       type: 'item',
+                    //       url: '/dashboard/monitoring',
+                    //       icon: icons['MonitorHeartOutlinedIcon']
 
-                        },
+                    //     },
 
-                        {
-                        id: 'expenses',
-                        title: 'Expenses',
-                        type: 'item',
-                        url: '/dashboard/expenses',
-                        icon: icons['AccountBalanceWalletOutlinedIcon'] // You can change this
-                        },
-                        {
-                          id: 'statistics',
-                          title: 'Statistics',
-                          type: 'item',
-                          url: '/dashboard/statistics',
-                          icon: icons['BarChartOutlinedIcon']
-                        }
+                    //     {
+                    //     id: 'expenses',
+                    //     title: 'Expenses',
+                    //     type: 'item',
+                    //     url: '/dashboard/expenses',
+                    //     icon: icons['AccountBalanceWalletOutlinedIcon'] // You can change this
+                    //     },
+                    //     {
+                    //       id: 'statistics',
+                    //       title: 'Statistics',
+                    //       type: 'item',
+                    //       url: '/dashboard/statistics',
+                    //       icon: icons['BarChartOutlinedIcon']
+                    //     }
 
 
-                      ]
-                    },
-                    {
-                      id : "Applications",
-                      title: "Applications",
-                      type: "collapse",
-                      icon: icons['AppsOutlinedIcon'],
-                      children: [ 
+                    //   ]
+                    // },
+                    // {
+                    //   id : "Applications",
+                    //   title: "Applications",
+                    //   type: "collapse",
+                    //   icon: icons['AppsOutlinedIcon'],
+                    //   children: [ 
 
-                        {
-                        id: "Calendar" ,
-                        title: "Calendar",
-                        type: "item",
-                        url: '/Applications/Calendar',
-                        icon :  icons["CalendarMonthOutlinedIcon"]
-                        },
-                        {
-                          id:"File manager",
-                          title: "File manager",
-                          type: "item",
-                          url: '/Applications/File manager',
-                          icon : icons["FolderOpenOutlinedIcon"],
-                        },
-                        {
-                          id :"Mailbox",  
-                          title: "Mailbox",
-                          type: "item",
-                          url: '/Applications/Mailbox',
-                          icon : icons["MailOutlineOutlinedIcon"],
-                        }
-                      ]
+                    //     {
+                    //     id: "Calendar" ,
+                    //     title: "Calendar",
+                    //     type: "item",
+                    //     url: '/Applications/Calendar',
+                    //     icon :  icons["CalendarMonthOutlinedIcon"]
+                    //     },
+                    //     {
+                    //       id:"File manager",
+                    //       title: "File manager",
+                    //       type: "item",
+                    //       url: '/Applications/File manager',
+                    //       icon : icons["FolderOpenOutlinedIcon"],
+                    //     },
+                    //     {
+                    //       id :"Mailbox",  
+                    //       title: "Mailbox",
+                    //       type: "item",
+                    //       url: '/Applications/Mailbox',
+                    //       icon : icons["MailOutlineOutlinedIcon"],
+                    //     }
+                    //   ]
 
-                    },
+                    // },
 
                      {
                       id : "account",
