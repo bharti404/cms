@@ -1,3 +1,22 @@
+// import React, { useState, useEffect } from "react";
+// import {
+//   Box,
+//   Typography,
+//   TextField,
+//   Button,
+//   Select,
+//   MenuItem,
+//   Stack,
+//   Divider,
+//   IconButton,
+//   Grid,
+//   Paper,
+//   Checkbox,
+//   FormControlLabel
+// } from "@mui/material";
+// import { Add as AddIcon, Delete as DeleteIcon } from "@mui/icons-material";
+// import axiosInstance from "api/axiosInstance";
+
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -7,7 +26,22 @@ import {
   Select,
   MenuItem,
   Stack,
+  IconButton,
+  Grid,
+  Paper,
+  Checkbox,
+  FormControlLabel,
+  CircularProgress,
+  Snackbar,
+  Alert,
+    List,
+  ListItemButton,
+  ListItemText,
+  ListItem
+
 } from "@mui/material";
+import { Add as AddIcon, Delete as DeleteIcon } from "@mui/icons-material";
+import axiosInstance from "api/axiosInstance";
 
 const servicesData = {
   "Hacking Works": [
@@ -648,151 +682,1633 @@ const servicesData = {
   ],
 };
 
-function CreateInvoice({ category, onClose }) {
-  const [selectedCategories, setSelectedCategories] = useState([]); // multiple categories
-  const [data, setData] = useState({});
-  const [newCategory, setNewCategory] = useState("");
+// function CreateInvoice({ category, onClose }) {
+//   const [selectedCategories, setSelectedCategories] = useState([]); // multiple categories
+//   const [data, setData] = useState({});
+//   const [newCategory, setNewCategory] = useState("");
 
-  // Add first category from parent (only once)
-  useEffect(() => {
-    if (category && !selectedCategories.includes(category)) {
-      setSelectedCategories([category]);
-    }
-  }, [category]);
+//   // Add first category from parent (only once)
+//   useEffect(() => {
+//     if (category && !selectedCategories.includes(category)) {
+//       setSelectedCategories([category]);
+//     }
+//   }, [category]);
 
-  // Handle input change
-  const handleChange = (category, item, field, value) => {
-    setData((prev) => ({
-      ...prev,
-      [category]: {
-        ...prev[category],
-        [item]: { ...prev[category]?.[item], [field]: value },
+//   // Handle input change
+//   const handleChange = (category, item, field, value) => {
+//     setData((prev) => ({
+//       ...prev,
+//       [category]: {
+//         ...prev[category],
+//         [item]: { ...prev[category]?.[item], [field]: value },
+//       },
+//     }));
+//   };
+
+//   // Add another category (cannot duplicate)
+//   const handleAddCategory = () => {
+//     if (newCategory && !selectedCategories.includes(newCategory)) {
+//       setSelectedCategories([...selectedCategories, newCategory]);
+//       setNewCategory("");
+//     }
+//   };
+
+//   return (
+//     <form>
+//       {/* Add more category dropdown */}
+
+//       {/* Render all selected categories */}
+//       {selectedCategories.map((catName, catIndex) => (
+//         <Box key={catIndex} mb={4}>
+//           {/* Category title */}
+//           <Typography
+//             variant="h5"
+//             sx={{ mb: 2, textAlign: "center", fontWeight: "bold" }}
+//           >
+//             {catName}
+//           </Typography>
+
+//           {/* Category Groups */}
+//           {servicesData[catName]?.map((group, index) => (
+//             <Box key={index} mb={3}>
+//               <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
+//                 {group.heading}
+//               </Typography>
+//               {group.items.map((item, iIndex) => (
+//                 <Box
+//                   key={iIndex}
+//                   mb={2}
+//                   p={2}
+//                   border="1px solid #ddd"
+//                   borderRadius="6px"
+//                 >
+//                   <Typography sx={{ mb: 1 }}>{item}</Typography>
+//                   <TextField
+//                     fullWidth
+//                     label="Description"
+//                     size="small"
+//                     sx={{ mb: 1 }}
+//                     value={data[catName]?.[item]?.description || ""}
+//                     onChange={(e) =>
+//                       handleChange(catName, item, "description", e.target.value)
+//                     }
+//                   />
+//                   <TextField
+//                     fullWidth
+//                     label="Quantity"
+//                     type="number"
+//                     size="small"
+//                     sx={{ mb: 1 }}
+//                     value={data[catName]?.[item]?.quantity || ""}
+//                     onChange={(e) =>
+//                       handleChange(catName, item, "quantity", e.target.value)
+//                     }
+//                   />
+//                   <TextField
+//                     fullWidth
+//                     label="Price"
+//                     type="number"
+//                     size="small"
+//                     value={data[catName]?.[item]?.price || ""}
+//                     onChange={(e) =>
+//                       handleChange(catName, item, "price", e.target.value)
+//                     }
+//                   />
+//                 </Box>
+//               ))}
+//             </Box>
+//           ))}
+//         </Box>
+//       ))}
+
+//       <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
+//         <Select
+//           fullWidth
+//           value={newCategory}
+//           onChange={(e) => setNewCategory(e.target.value)}
+//           displayEmpty
+//         >
+//           <MenuItem value="">
+//             <em>-- Select Category --</em>
+//           </MenuItem>
+//           {Object.keys(servicesData)
+//             .filter((cat) => !selectedCategories.includes(cat))
+//             .map((cat) => (
+//               <MenuItem key={cat} value={cat}>
+//                 {cat}
+//               </MenuItem>
+//             ))}
+//         </Select>
+
+//         <Button variant="outlined" type="button" onClick={handleAddCategory}>
+//           + Add More Service
+//         </Button>
+//       </Stack>
+
+//       {/* Save & Cancel */}
+//       {selectedCategories.length > 0 && (
+//         <Stack direction="row" justifyContent="flex-end" spacing={2}>
+//           <Button
+//             type="submit"
+//             variant="contained"
+//             color="primary"
+//             onClick={() => console.log("Invoice Data:", data)}
+//           >
+//             Save
+//           </Button>
+//           <Button
+//             type="button"
+//             variant="outlined"
+//             color="error"
+//             onClick={onClose}
+//           >
+//             Cancel
+//           </Button>
+//         </Stack>
+//       )}
+//     </form>
+//   );
+// }
+
+// export default CreateInvoice;
+
+
+// function CreateInvoice({ onClose, customerInfo }) {
+//   const [invoiceItems, setInvoiceItems] = useState([]);
+//   const [categories, setCategories] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [paymentMethods, setPaymentMethods] = useState({
+//     paynowKey: "",
+//     internetTransfer: "",
+//     cheque: ""
+//   });
+//   const [terms, setTerms] = useState({
+//     prices: "",
+//     downpayments: "",
+//     quality: "",
+//     paymentTerms: "",
+//     warranty: "",
+//     confidentiality: "",
+//     mediation: ""
+//   });
+//   const [signatures, setSignatures] = useState({
+//     contractor: {
+//       name: "",
+//       signatureUrl: ""
+//     },
+//     customer: {
+//       name: customerInfo.customer.name || "",
+//       agreed: false,
+//       signatureUrl: ""
+//     }
+//   });
+//   const [notes, setNotes] = useState("");
+//   const [status, setStatus] = useState("draft");
+
+//   // Calculate totals
+//   const subTotal = invoiceItems.reduce((sum, item) => sum + (item.quantity * item.amount), 0);
+//   const gst = subTotal * 0.09; // 9% GST
+//   const grandTotal = subTotal + gst;
+
+//   // Fetch categories from API
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       try {
+//         const response = await axiosInstance.get("/api/categories");
+//         setCategories(response.data);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error("Error fetching categories:", error);
+//         setLoading(false);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   // Add a new invoice item
+//   const handleAddItem = () => {
+//     setInvoiceItems([...invoiceItems, {
+//       category: "",
+//       title: "",
+//       workDescription: "",
+//       quantity: 1,
+//       amount: 0
+//     }]);
+//   };
+
+//   // Update an invoice item
+//   const handleItemChange = (index, field, value) => {
+//     const updatedItems = [...invoiceItems];
+//     updatedItems[index] = {
+//       ...updatedItems[index],
+//       [field]: field === 'quantity' || field === 'amount' ? Number(value) : value
+//     };
+    
+//     // If category changes, update the title
+//     if (field === 'category') {
+//       const selectedCategory = categories.find(cat => cat._id === value);
+//       if (selectedCategory) {
+//         updatedItems[index].title = selectedCategory.name;
+//       }
+//     }
+    
+//     setInvoiceItems(updatedItems);
+//   };
+
+//   // Remove an invoice item
+//   const handleRemoveItem = (index) => {
+//     const updatedItems = [...invoiceItems];
+//     updatedItems.splice(index, 1);
+//     setInvoiceItems(updatedItems);
+//   };
+
+//   // Handle signature agreement change
+//   const handleSignatureAgreement = (e) => {
+//     setSignatures({
+//       ...signatures,
+//       customer: {
+//         ...signatures.customer,
+//         agreed: e.target.checked
+//       }
+//     });
+//   };
+
+//   // Handle form submission
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+    
+//     const invoiceData = {
+//       referenceNo: customerInfo.referenceNo || `INV-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
+//       company: customerInfo.company,
+//       customer: customerInfo.customer,
+//       date: new Date().toISOString(),
+//       hdbLicense: customerInfo.hdbLicense,
+//       items: invoiceItems,
+//       subTotal,
+//       gst,
+//       grandTotal,
+//       paymentMethods,
+//       terms,
+//       signatures,
+//       notes,
+//       status
+//     };
+
+//     try {
+//       const response = await axiosInstance.post("/api/invoices", invoiceData);
+//       console.log("Invoice created:", response.data);
+//       onClose(); // Close the modal on success
+//       // You might want to add a success notification here
+//     } catch (error) {
+//       console.error("Error creating invoice:", error);
+//       // You might want to add an error notification here
+//     }
+//   };
+
+//   if (loading) {
+//     return <div>Loading categories...</div>;
+//   }
+
+//   return (
+//     <Box component="form" onSubmit={handleSubmit} sx={{ p: 2 }}>
+//       {/* Invoice Items Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Invoice Items
+//       </Typography>
+      
+//       {invoiceItems.map((item, index) => (
+//         <Paper key={index} sx={{ p: 2, mb: 2 }}>
+//           <Grid container spacing={2}>
+//             <Grid item xs={12} sm={6}>
+//               <Select
+//                 fullWidth
+//                 value={item.category}
+//                 onChange={(e) => handleItemChange(index, 'category', e.target.value)}
+//                 required
+//                 displayEmpty
+//               >
+//                 <MenuItem value="">
+//                   <em>Select Category</em>
+//                 </MenuItem>
+//                 {categories.map((category) => (
+//                   <MenuItem key={category._id} value={category._id}>
+//                     {category.name}
+//                   </MenuItem>
+//                 ))}
+//               </Select>
+//             </Grid>
+//             <Grid item xs={12} sm={6}>
+//               <TextField
+//                 fullWidth
+//                 label="Title"
+//                 value={item.title}
+//                 onChange={(e) => handleItemChange(index, 'title', e.target.value)}
+//                 required
+//               />
+//             </Grid>
+//             <Grid item xs={12}>
+//               <TextField
+//                 fullWidth
+//                 label="Work Description"
+//                 multiline
+//                 rows={2}
+//                 value={item.workDescription}
+//                 onChange={(e) => handleItemChange(index, 'workDescription', e.target.value)}
+//               />
+//             </Grid>
+//             <Grid item xs={6} sm={3}>
+//               <TextField
+//                 fullWidth
+//                 label="Quantity"
+//                 type="number"
+//                 value={item.quantity}
+//                 onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+//                 required
+//                 inputProps={{ min: 1 }}
+//               />
+//             </Grid>
+//             <Grid item xs={6} sm={3}>
+//               <TextField
+//                 fullWidth
+//                 label="Amount (SGD)"
+//                 type="number"
+//                 value={item.amount}
+//                 onChange={(e) => handleItemChange(index, 'amount', e.target.value)}
+//                 required
+//                 inputProps={{ min: 0, step: 0.01 }}
+//               />
+//             </Grid>
+//             <Grid item xs={12} sm={6}>
+//               <TextField
+//                 fullWidth
+//                 label="Total (SGD)"
+//                 value={(item.quantity * item.amount).toFixed(2)}
+//                 disabled
+//               />
+//             </Grid>
+//             <Grid item xs={12} sx={{ textAlign: 'right' }}>
+//               <IconButton onClick={() => handleRemoveItem(index)} color="error">
+//                 <DeleteIcon />
+//               </IconButton>
+//             </Grid>
+//           </Grid>
+//         </Paper>
+//       ))}
+      
+//       <Button
+//         variant="outlined"
+//         startIcon={<AddIcon />}
+//         onClick={handleAddItem}
+//         sx={{ mb: 3 }}
+//       >
+//         Add Item
+//       </Button>
+
+//       {/* Payment Methods Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Payment Methods
+//       </Typography>
+//       <Grid container spacing={2} sx={{ mb: 3 }}>
+//         <Grid item xs={12} sm={4}>
+//           <TextField
+//             fullWidth
+//             label="PayNow Key"
+//             value={paymentMethods.paynowKey}
+//             onChange={(e) => setPaymentMethods({...paymentMethods, paynowKey: e.target.value})}
+//           />
+//         </Grid>
+//         <Grid item xs={12} sm={4}>
+//           <TextField
+//             fullWidth
+//             label="Internet Transfer"
+//             value={paymentMethods.internetTransfer}
+//             onChange={(e) => setPaymentMethods({...paymentMethods, internetTransfer: e.target.value})}
+//           />
+//         </Grid>
+//         <Grid item xs={12} sm={4}>
+//           <TextField
+//             fullWidth
+//             label="Cheque Payment"
+//             value={paymentMethods.cheque}
+//             onChange={(e) => setPaymentMethods({...paymentMethods, cheque: e.target.value})}
+//           />
+//         </Grid>
+//       </Grid>
+
+//       {/* Terms & Conditions Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Terms & Conditions
+//       </Typography>
+//       <Grid container spacing={2} sx={{ mb: 3 }}>
+//         {Object.keys(terms).map((termKey) => (
+//           <Grid item xs={12} key={termKey}>
+//             <TextField
+//               fullWidth
+//               label={termKey.split(/(?=[A-Z])/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+//               value={terms[termKey]}
+//               onChange={(e) => setTerms({...terms, [termKey]: e.target.value})}
+//               multiline
+//               rows={2}
+//               placeholder={`Enter ${termKey} terms`}
+//             />
+//           </Grid>
+//         ))}
+//       </Grid>
+
+//       {/* Signatures Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Signatures
+//       </Typography>
+//       <Paper sx={{ p: 2, mb: 3 }}>
+//         <Grid container spacing={2}>
+//           <Grid item xs={12} sm={6}>
+//             <TextField
+//               fullWidth
+//               label="Contractor Name"
+//               value={signatures.contractor.name}
+//               onChange={(e) => setSignatures({
+//                 ...signatures,
+//                 contractor: {
+//                   ...signatures.contractor,
+//                   name: e.target.value
+//                 }
+//               })}
+//             />
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <TextField
+//               fullWidth
+//               label="Contractor Signature URL"
+//               value={signatures.contractor.signatureUrl}
+//               onChange={(e) => setSignatures({
+//                 ...signatures,
+//                 contractor: {
+//                   ...signatures.contractor,
+//                   signatureUrl: e.target.value
+//                 }
+//               })}
+//             />
+//           </Grid>
+//           <Grid item xs={12}>
+//             <FormControlLabel
+//               control={
+//                 <Checkbox
+//                   checked={signatures.customer.agreed}
+//                   onChange={handleSignatureAgreement}
+//                 />
+//               }
+//               label="I agree to the terms and conditions"
+//             />
+//           </Grid>
+//         </Grid>
+//       </Paper>
+
+//       {/* Notes Section */}
+//       <TextField
+//         fullWidth
+//         label="Additional Notes"
+//         value={notes}
+//         onChange={(e) => setNotes(e.target.value)}
+//         multiline
+//         rows={3}
+//         sx={{ mb: 3 }}
+//       />
+
+//       {/* Status Selection */}
+//       <Select
+//         fullWidth
+//         value={status}
+//         onChange={(e) => setStatus(e.target.value)}
+//         sx={{ mb: 3 }}
+//       >
+//         <MenuItem value="draft">Draft</MenuItem>
+//         <MenuItem value="sent">Sent</MenuItem>
+//         <MenuItem value="confirmed">Confirmed</MenuItem>
+//       </Select>
+
+//       {/* Totals Section */}
+//       <Paper sx={{ p: 2, mb: 3 }}>
+//         <Grid container spacing={2}>
+//           <Grid item xs={6}>
+//             <Typography>Subtotal:</Typography>
+//           </Grid>
+//           <Grid item xs={6} sx={{ textAlign: 'right' }}>
+//             <Typography>SGD {subTotal.toFixed(2)}</Typography>
+//           </Grid>
+//           <Grid item xs={6}>
+//             <Typography>GST (9%):</Typography>
+//           </Grid>
+//           <Grid item xs={6} sx={{ textAlign: 'right' }}>
+//             <Typography>SGD {gst.toFixed(2)}</Typography>
+//           </Grid>
+//           <Grid item xs={6}>
+//             <Typography variant="h6">Grand Total:</Typography>
+//           </Grid>
+//           <Grid item xs={6} sx={{ textAlign: 'right' }}>
+//             <Typography variant="h6">SGD {grandTotal.toFixed(2)}</Typography>
+//           </Grid>
+//         </Grid>
+//       </Paper>
+
+//       {/* Action Buttons */}
+//       <Stack direction="row" spacing={2} justifyContent="flex-end">
+//         <Button
+//           type="button"
+//           variant="outlined"
+//           color="error"
+//           onClick={onClose}
+//         >
+//           Cancel
+//         </Button>
+//         <Button
+//           type="submit"
+//           variant="contained"
+//           color="primary"
+//         >
+//           Save Invoice
+//         </Button>
+//       </Stack>
+//     </Box>
+//   );
+// }
+
+// export default CreateInvoice;
+
+
+
+
+
+
+// function CreateInvoice({ onClose, customerInfo }) {
+//   // State for form data
+//   const [invoiceItems, setInvoiceItems] = useState([]);
+//   const [categories, setCategories] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const [submitting, setSubmitting] = useState(false);
+//   const [error, setError] = useState(null);
+//   const [success, setSuccess] = useState(false);
+
+//   // Form sections
+//   const [paymentMethods, setPaymentMethods] = useState({
+//     paynowKey: "",
+//     internetTransfer: "",
+//     cheque: ""
+//   });
+//   const [terms, setTerms] = useState({
+//     prices: "",
+//     downpayments: "",
+//     quality: "",
+//     paymentTerms: "",
+//     warranty: "",
+//     confidentiality: "",
+//     mediation: ""
+//   });
+//   const [signatures, setSignatures] = useState({
+//     contractor: {
+//       name: "",
+//       signatureUrl: ""
+//     },
+//     customer: {
+//       name: customerInfo.customer.name || "",
+//       agreed: false,
+//       signatureUrl: ""
+//     }
+//   });
+//   const [notes, setNotes] = useState("");
+//   const [status, setStatus] = useState("draft");
+
+//   // Calculate totals
+//   const subTotal = invoiceItems.reduce((sum, item) => sum + (item.quantity * item.amount), 0);
+//   const gst = subTotal * 0.09; // 9% GST
+//   const grandTotal = subTotal + gst;
+
+//   // Fetch categories from API
+//   useEffect(() => {
+//     const fetchCategories = async () => {
+//       try {
+//         const response = await axiosInstance.get("/api/categories");
+//         setCategories(response.data);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error("Error fetching categories:", error);
+//         setError("Failed to load categories. Please try again.");
+//         setLoading(false);
+//       }
+//     };
+//     fetchCategories();
+//   }, []);
+
+//   // Add a new invoice item
+//   const handleAddItem = () => {
+//     setInvoiceItems([...invoiceItems, {
+//       category: "",
+//       title: "",
+//       workDescription: "",
+//       quantity: 1,
+//       amount: 0
+//     }]);
+//   };
+
+//   // Update an invoice item
+//   const handleItemChange = (index, field, value) => {
+//     const updatedItems = [...invoiceItems];
+//     updatedItems[index] = {
+//       ...updatedItems[index],
+//       [field]: field === 'quantity' || field === 'amount' ? Number(value) : value
+//     };
+    
+//     // If category changes, update the title
+//     if (field === 'category') {
+//       const selectedCategory = categories.find(cat => cat._id === value);
+//       if (selectedCategory) {
+//         updatedItems[index].title = selectedCategory.name;
+//       }
+//     }
+    
+//     setInvoiceItems(updatedItems);
+//   };
+
+//   // Remove an invoice item
+//   const handleRemoveItem = (index) => {
+//     const updatedItems = [...invoiceItems];
+//     updatedItems.splice(index, 1);
+//     setInvoiceItems(updatedItems);
+//   };
+
+//   // Handle signature agreement change
+//   const handleSignatureAgreement = (e) => {
+//     setSignatures({
+//       ...signatures,
+//       customer: {
+//         ...signatures.customer,
+//         agreed: e.target.checked
+//       }
+//     });
+//   };
+
+//   // Handle form submission
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setSubmitting(true);
+//     setError(null);
+    
+//     // Prepare the invoice data
+//     const invoiceData = {
+//       referenceNo: customerInfo.referenceNo || `INV-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
+//       company: customerInfo.company,
+//       customer: customerInfo.customer,
+//       date: new Date().toISOString(),
+//       hdbLicense: customerInfo.hdbLicense,
+//       items: invoiceItems,
+//       subTotal,
+//       gst,
+//       grandTotal,
+//       paymentMethods,
+//       terms,
+//       signatures,
+//       notes,
+//       status
+//     };
+
+//     try {
+//       // Make the API call
+//       const response = await axiosInstance.post("/api/invoices", invoiceData);
+      
+//       // Handle success
+//       console.log("Invoice created:", response.data);
+//       setSuccess(true);
+      
+//       // Close the modal after 2 seconds
+//       setTimeout(() => {
+//         onClose();
+//       }, 2000);
+      
+//     } catch (error) {
+//       console.error("Error creating invoice:", error);
+//       setError(error.response?.data?.message || "Failed to create invoice. Please try again.");
+//     } finally {
+//       setSubmitting(false);
+//     }
+//   };
+
+//   // Close snackbar
+//   const handleCloseSnackbar = () => {
+//     setError(null);
+//     setSuccess(false);
+//   };
+
+//   if (loading) {
+//     return (
+//       <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+//         <CircularProgress />
+//       </Box>
+//     );
+//   }
+
+//   return (
+//     <Box component="form" onSubmit={handleSubmit} sx={{ p: 2 }}>
+//       {/* Invoice Items Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Invoice Items
+//       </Typography>
+      
+//       {invoiceItems.map((item, index) => (
+//         <Paper key={index} sx={{ p: 2, mb: 2 }}>
+//           <Grid container spacing={2}>
+//             <Grid item xs={12} sm={6}>
+//               <Select
+//                 fullWidth
+//                 value={item.category}
+//                 onChange={(e) => handleItemChange(index, 'category', e.target.value)}
+//                 required
+//                 displayEmpty
+//               >
+//                 <MenuItem value="">
+//                   <em>Select Category</em>
+//                 </MenuItem>
+//                 {categories.map((category) => (
+//                   <MenuItem key={category._id} value={category._id}>
+//                     {category.name}
+//                   </MenuItem>
+//                 ))}
+//               </Select>
+//             </Grid>
+//             <Grid item xs={12} sm={6}>
+//               <TextField
+//                 fullWidth
+//                 label="Title"
+//                 value={item.title}
+//                 onChange={(e) => handleItemChange(index, 'title', e.target.value)}
+//                 required
+//               />
+//             </Grid>
+//             <Grid item xs={12}>
+//               <TextField
+//                 fullWidth
+//                 label="Work Description"
+//                 multiline
+//                 rows={2}
+//                 value={item.workDescription}
+//                 onChange={(e) => handleItemChange(index, 'workDescription', e.target.value)}
+//               />
+//             </Grid>
+//             <Grid item xs={6} sm={3}>
+//               <TextField
+//                 fullWidth
+//                 label="Quantity"
+//                 type="number"
+//                 value={item.quantity}
+//                 onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+//                 required
+//                 inputProps={{ min: 1 }}
+//               />
+//             </Grid>
+//             <Grid item xs={6} sm={3}>
+//               <TextField
+//                 fullWidth
+//                 label="Amount (SGD)"
+//                 type="number"
+//                 value={item.amount}
+//                 onChange={(e) => handleItemChange(index, 'amount', e.target.value)}
+//                 required
+//                 inputProps={{ min: 0, step: 0.01 }}
+//               />
+//             </Grid>
+//             <Grid item xs={12} sm={6}>
+//               <TextField
+//                 fullWidth
+//                 label="Total (SGD)"
+//                 value={(item.quantity * item.amount).toFixed(2)}
+//                 disabled
+//               />
+//             </Grid>
+//             <Grid item xs={12} sx={{ textAlign: 'right' }}>
+//               <IconButton onClick={() => handleRemoveItem(index)} color="error">
+//                 <DeleteIcon />
+//               </IconButton>
+//             </Grid>
+//           </Grid>
+//         </Paper>
+//       ))}
+      
+//       <Button
+//         variant="outlined"
+//         startIcon={<AddIcon />}
+//         onClick={handleAddItem}
+//         sx={{ mb: 3 }}
+//       >
+//         Add Item
+//       </Button>
+
+//       {/* Payment Methods Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Payment Methods
+//       </Typography>
+//       <Grid container spacing={2} sx={{ mb: 3 }}>
+//         <Grid item xs={12} sm={4}>
+//           <TextField
+//             fullWidth
+//             label="PayNow Key"
+//             value={paymentMethods.paynowKey}
+//             onChange={(e) => setPaymentMethods({...paymentMethods, paynowKey: e.target.value})}
+//           />
+//         </Grid>
+//         <Grid item xs={12} sm={4}>
+//           <TextField
+//             fullWidth
+//             label="Internet Transfer"
+//             value={paymentMethods.internetTransfer}
+//             onChange={(e) => setPaymentMethods({...paymentMethods, internetTransfer: e.target.value})}
+//           />
+//         </Grid>
+//         <Grid item xs={12} sm={4}>
+//           <TextField
+//             fullWidth
+//             label="Cheque Payment"
+//             value={paymentMethods.cheque}
+//             onChange={(e) => setPaymentMethods({...paymentMethods, cheque: e.target.value})}
+//           />
+//         </Grid>
+//       </Grid>
+
+//       {/* Terms & Conditions Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Terms & Conditions
+//       </Typography>
+//       <Grid container spacing={2} sx={{ mb: 3 }}>
+//         {Object.keys(terms).map((termKey) => (
+//           <Grid item xs={12} key={termKey}>
+//             <TextField
+//               fullWidth
+//               label={termKey.split(/(?=[A-Z])/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+//               value={terms[termKey]}
+//               onChange={(e) => setTerms({...terms, [termKey]: e.target.value})}
+//               multiline
+//               rows={2}
+//               placeholder={`Enter ${termKey} terms`}
+//             />
+//           </Grid>
+//         ))}
+//       </Grid>
+
+//       {/* Signatures Section */}
+//       <Typography variant="h6" gutterBottom>
+//         Signatures
+//       </Typography>
+//       <Paper sx={{ p: 2, mb: 3 }}>
+//         <Grid container spacing={2}>
+//           <Grid item xs={12} sm={6}>
+//             <TextField
+//               fullWidth
+//               label="Contractor Name"
+//               value={signatures.contractor.name}
+//               onChange={(e) => setSignatures({
+//                 ...signatures,
+//                 contractor: {
+//                   ...signatures.contractor,
+//                   name: e.target.value
+//                 }
+//               })}
+//             />
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <TextField
+//               fullWidth
+//               label="Contractor Signature URL"
+//               value={signatures.contractor.signatureUrl}
+//               onChange={(e) => setSignatures({
+//                 ...signatures,
+//                 contractor: {
+//                   ...signatures.contractor,
+//                   signatureUrl: e.target.value
+//                 }
+//               })}
+//             />
+//           </Grid>
+//           <Grid item xs={12}>
+//             <FormControlLabel
+//               control={
+//                 <Checkbox
+//                   checked={signatures.customer.agreed}
+//                   onChange={handleSignatureAgreement}
+//                   required
+//                 />
+//               }
+//               label="I agree to the terms and conditions"
+//             />
+//           </Grid>
+//         </Grid>
+//       </Paper>
+
+//       {/* Notes Section */}
+//       <TextField
+//         fullWidth
+//         label="Additional Notes"
+//         value={notes}
+//         onChange={(e) => setNotes(e.target.value)}
+//         multiline
+//         rows={3}
+//         sx={{ mb: 3 }}
+//       />
+
+//       {/* Status Selection */}
+//       <Select
+//         fullWidth
+//         value={status}
+//         onChange={(e) => setStatus(e.target.value)}
+//         sx={{ mb: 3 }}
+//       >
+//         <MenuItem value="draft">Draft</MenuItem>
+//         <MenuItem value="sent">Sent</MenuItem>
+//         <MenuItem value="confirmed">Confirmed</MenuItem>
+//       </Select>
+
+//       {/* Totals Section */}
+//       <Paper sx={{ p: 2, mb: 3 }}>
+//         <Grid container spacing={2}>
+//           <Grid item xs={6}>
+//             <Typography>Subtotal:</Typography>
+//           </Grid>
+//           <Grid item xs={6} sx={{ textAlign: 'right' }}>
+//             <Typography>SGD {subTotal.toFixed(2)}</Typography>
+//           </Grid>
+//           <Grid item xs={6}>
+//             <Typography>GST (9%):</Typography>
+//           </Grid>
+//           <Grid item xs={6} sx={{ textAlign: 'right' }}>
+//             <Typography>SGD {gst.toFixed(2)}</Typography>
+//           </Grid>
+//           <Grid item xs={6}>
+//             <Typography variant="h6">Grand Total:</Typography>
+//           </Grid>
+//           <Grid item xs={6} sx={{ textAlign: 'right' }}>
+//             <Typography variant="h6">SGD {grandTotal.toFixed(2)}</Typography>
+//           </Grid>
+//         </Grid>
+//       </Paper>
+
+//       {/* Action Buttons */}
+//       <Stack direction="row" spacing={2} justifyContent="flex-end">
+//         <Button
+//           type="button"
+//           variant="outlined"
+//           color="error"
+//           onClick={onClose}
+//           disabled={submitting}
+//         >
+//           Cancel
+//         </Button>
+//         <Button
+//           type="submit"
+//           variant="contained"
+//           color="primary"
+//           disabled={submitting || !signatures.customer.agreed}
+//           startIcon={submitting ? <CircularProgress size={20} /> : null}
+//         >
+//           {submitting ? "Creating..." : "Create Invoice"}
+//         </Button>
+//       </Stack>
+
+//       {/* Error/Success Feedback */}
+//       <Snackbar
+//         open={!!error || success}
+//         autoHideDuration={6000}
+//         onClose={handleCloseSnackbar}
+//         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+//       >
+//         <Alert
+//           onClose={handleCloseSnackbar}
+//           severity={success ? 'success' : 'error'}
+//           sx={{ width: '100%' }}
+//         >
+//           {success ? 'Invoice created successfully!' : error}
+//         </Alert>
+//       </Snackbar>
+//     </Box>
+//   );
+// }
+
+// export default CreateInvoice;
+
+
+
+function CreateInvoice({ onClose, customerInfo }) {
+  // State for form data
+  const [invoiceData, setInvoiceData] = useState({
+    selectedCategory: "",
+    services: {},
+    paymentMethods: {
+      paynowKey: "",
+      internetTransfer: "",
+      cheque: ""
+    },
+    terms: {
+      prices: "",
+      downpayments: "",
+      quality: "",
+      paymentTerms: "",
+      warranty: "",
+      confidentiality: "",
+      mediation: ""
+    },
+    signatures: {
+      contractor: {
+        name: "",
+        signatureUrl: ""
       },
+      customer: {
+        name: customerInfo.customer.name || "",
+        agreed: false,
+        signatureUrl: ""
+      }
+    },
+    notes: "",
+    status: "draft"
+  });
+
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  // Fetch categories from API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axiosInstance.get("/api/categories");
+        setCategories(response.data);
+        
+        // Initialize services structure with all categories
+        const initialServices = {};
+        Object.keys(servicesData).forEach(category => {
+          initialServices[category] = servicesData[category].map(section => ({
+            heading: section.heading || "",
+            items: section.items.map(item => ({
+              description: item,
+              quantity: 1,
+              price: 0,
+              selected: false
+            }))
+          }));
+        });
+        
+        setInvoiceData(prev => ({
+          ...prev,
+          services: initialServices
+        }));
+        
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+        setError("Failed to load categories. Please try again.");
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Handle category selection
+  const handleCategoryChange = (categoryId) => {
+    const selectedCategory = categories.find(cat => cat._id === categoryId);
+    setInvoiceData(prev => ({
+      ...prev,
+      selectedCategory: categoryId,
+      selectedCategoryName: selectedCategory?.name || ""
     }));
   };
 
-  // Add another category (cannot duplicate)
-  const handleAddCategory = () => {
-    if (newCategory && !selectedCategories.includes(newCategory)) {
-      setSelectedCategories([...selectedCategories, newCategory]);
-      setNewCategory("");
-    }
+  // Handle changes for service items
+  const handleServiceChange = (category, sectionIndex, itemIndex, field, value) => {
+    setInvoiceData(prev => {
+      const updated = {...prev};
+      if (field === 'selected') {
+        updated.services[category][sectionIndex].items[itemIndex].selected = value;
+      } else {
+        updated.services[category][sectionIndex].items[itemIndex][field] = 
+          field === 'quantity' || field === 'price' ? Number(value) : value;
+      }
+      return updated;
+    });
   };
 
+  // Calculate totals
+  const calculateTotals = () => {
+    let subTotal = 0;
+    
+    Object.values(invoiceData.services).forEach(category => {
+      category.forEach(section => {
+        section.items.forEach(item => {
+          if (item.selected) {
+            subTotal += item.quantity * item.price;
+          }
+        });
+      });
+    });
+    
+    const gst = subTotal * 0.09; // 9% GST
+    const grandTotal = subTotal + gst;
+    
+    return { subTotal, gst, grandTotal };
+  };
+
+  const { subTotal, gst, grandTotal } = calculateTotals();
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitting(true);
+  setError(null);
+
+  try {
+    // Prepare the items for submission
+    const items = [];
+    
+    Object.entries(invoiceData.services).forEach(([categoryName, sections]) => {
+      // Find the category ID from the categories list
+      const category = categories.find(cat => cat.name === categoryName);
+      const categoryId = category ? category._id : null;
+      
+      sections.forEach(section => {
+        section.items.forEach(item => {
+          if (item.selected) {
+            items.push({
+              category: categoryId, // Send the ID instead of name
+              title: section.heading || categoryName,
+              workDescription: item.description,
+              quantity: item.quantity,
+              amount: item.price
+            });
+          }
+        });
+      });
+    });
+
+    const invoicePayload = {
+      referenceNo: customerInfo.referenceNo || `INV-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
+      company: customerInfo.company,
+      customer: customerInfo.customer,
+      date: new Date().toISOString(),
+      hdbLicense: customerInfo.hdbLicense,
+      items,
+      subTotal,
+      gst,
+      grandTotal,
+      paymentMethods: invoiceData.paymentMethods,
+      terms: invoiceData.terms,
+      signatures: invoiceData.signatures,
+      notes: invoiceData.notes,
+      status: invoiceData.status
+    };
+
+    const response = await fetch('https://cms-sg.onrender.com/api/invoice', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(invoicePayload),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(errorText || `HTTP error! Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Success:', result);
+    setSuccess(true);
+    setTimeout(onClose, 2000);
+
+  } catch (error) {
+    console.error('Submission failed:', error);
+    setError(error.message || 'Failed to create invoice');
+  } finally {
+    setSubmitting(false);
+  }
+};
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setSubmitting(true);
+  //   setError(null);
+
+  //   try {
+      
+  //     const items = [];
+      
+  //     Object.entries(invoiceData.services).forEach(([category, sections]) => {
+  //       sections.forEach(section => {
+  //         section.items.forEach(item => {
+  //           if (item.selected) {
+  //             items.push({
+  //               category,
+  //               title: section.heading || category,
+  //               workDescription: item.description,
+  //               quantity: item.quantity,
+  //               amount: item.price
+  //             });
+  //           }
+  //         });
+  //       });
+  //     });
+
+  //     const invoicePayload = {
+  //       referenceNo: customerInfo.referenceNo || `INV-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
+  //       company: customerInfo.company,
+  //       customer: customerInfo.customer,
+  //       date: new Date().toISOString(),
+  //       hdbLicense: customerInfo.hdbLicense,
+  //       items,
+  //       subTotal,
+  //       gst,
+  //       grandTotal,
+  //       paymentMethods: invoiceData.paymentMethods,
+  //       terms: invoiceData.terms,
+  //       signatures: invoiceData.signatures,
+  //       notes: invoiceData.notes,
+  //       status: invoiceData.status
+  //     };
+
+  //     const response = await fetch('https://cms-sg.onrender.com/api/invoice', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(invoicePayload),
+  //     });
+
+  //     if (!response.ok) {
+  //       const errorText = await response.text();
+  //       throw new Error(errorText || `HTTP error! Status: ${response.status}`);
+  //     }
+
+  //     const result = await response.json();
+  //     console.log('Success:', result);
+  //     setSuccess(true);
+  //     setTimeout(onClose, 2000);
+
+  //   } catch (error) {
+  //     console.error('Submission failed:', error);
+  //     setError(error.message || 'Failed to create invoice');
+  //   } finally {
+  //     setSubmitting(false);
+  //   }
+  // };
+
+  // Close snackbar
+  const handleCloseSnackbar = () => {
+    setError(null);
+    setSuccess(false);
+  };
+
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="200px">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  const selectedCategoryName = categories.find(cat => cat._id === invoiceData.selectedCategory)?.name || "";
+
   return (
-    <form>
-      {/* Add more category dropdown */}
-
-      {/* Render all selected categories */}
-      {selectedCategories.map((catName, catIndex) => (
-        <Box key={catIndex} mb={4}>
-          {/* Category title */}
-          <Typography
-            variant="h5"
-            sx={{ mb: 2, textAlign: "center", fontWeight: "bold" }}
-          >
-            {catName}
-          </Typography>
-
-          {/* Category Groups */}
-          {servicesData[catName]?.map((group, index) => (
-            <Box key={index} mb={3}>
-              <Typography variant="h6" sx={{ mb: 1, fontWeight: "bold" }}>
-                {group.heading}
-              </Typography>
-              {group.items.map((item, iIndex) => (
-                <Box
-                  key={iIndex}
-                  mb={2}
-                  p={2}
-                  border="1px solid #ddd"
-                  borderRadius="6px"
-                >
-                  <Typography sx={{ mb: 1 }}>{item}</Typography>
-                  <TextField
-                    fullWidth
-                    label="Description"
-                    size="small"
-                    sx={{ mb: 1 }}
-                    value={data[catName]?.[item]?.description || ""}
-                    onChange={(e) =>
-                      handleChange(catName, item, "description", e.target.value)
-                    }
-                  />
-                  <TextField
-                    fullWidth
-                    label="Quantity"
-                    type="number"
-                    size="small"
-                    sx={{ mb: 1 }}
-                    value={data[catName]?.[item]?.quantity || ""}
-                    onChange={(e) =>
-                      handleChange(catName, item, "quantity", e.target.value)
-                    }
-                  />
-                  <TextField
-                    fullWidth
-                    label="Price"
-                    type="number"
-                    size="small"
-                    value={data[catName]?.[item]?.price || ""}
-                    onChange={(e) =>
-                      handleChange(catName, item, "price", e.target.value)
-                    }
-                  />
-                </Box>
-              ))}
-            </Box>
-          ))}
-        </Box>
-      ))}
-
-      <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ p: 2 }}>
+      {/* Category Selection Dropdown */}
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h6" gutterBottom>
+          Select Service Category
+        </Typography>
         <Select
           fullWidth
-          value={newCategory}
-          onChange={(e) => setNewCategory(e.target.value)}
+          value={invoiceData.selectedCategory}
+          onChange={(e) => handleCategoryChange(e.target.value)}
           displayEmpty
+          required
         >
           <MenuItem value="">
-            <em>-- Select Category --</em>
+            <em>-- Select a Category --</em>
           </MenuItem>
-          {Object.keys(servicesData)
-            .filter((cat) => !selectedCategories.includes(cat))
-            .map((cat) => (
-              <MenuItem key={cat} value={cat}>
-                {cat}
-              </MenuItem>
-            ))}
+          {categories.map((category) => (
+            <MenuItem key={category._id} value={category._id}>
+              {category.name}
+            </MenuItem>
+          ))}
         </Select>
+      </Box>
 
-        <Button variant="outlined" type="button" onClick={handleAddCategory}>
-          + Add More Service
+      {/* Services Section (only shown when category is selected) */}
+      {invoiceData.selectedCategory && (
+        <>
+          <Typography variant="h5" gutterBottom>
+            {selectedCategoryName}
+          </Typography>
+          
+          {servicesData[selectedCategoryName]?.map((section, sectionIndex) => (
+            <Paper key={sectionIndex} sx={{ p: 2, mb: 3 }}>
+              {section.heading && (
+                <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
+                  {section.heading}
+                </Typography>
+              )}
+              
+              <List dense>
+                {section.items.map((item, itemIndex) => (
+                  <ListItem key={itemIndex} sx={{ pl: 0 }}>
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item xs={12} sm={6}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={invoiceData.services[selectedCategoryName]?.[sectionIndex]?.items[itemIndex]?.selected || false}
+                              onChange={(e) => handleServiceChange(
+                                selectedCategoryName, 
+                                sectionIndex, 
+                                itemIndex, 
+                                'selected', 
+                                e.target.checked
+                              )}
+                            />
+                          }
+                          label={item}
+                        />
+                      </Grid>
+                      
+                      {invoiceData.services[selectedCategoryName]?.[sectionIndex]?.items[itemIndex]?.selected && (
+                        <>
+                          <Grid item xs={6} sm={3}>
+                            <TextField
+                              fullWidth
+                              label="Quantity"
+                              type="number"
+                              value={invoiceData.services[selectedCategoryName][sectionIndex].items[itemIndex].quantity}
+                              onChange={(e) => handleServiceChange(
+                                selectedCategoryName, 
+                                sectionIndex, 
+                                itemIndex, 
+                                'quantity', 
+                                e.target.value
+                              )}
+                              inputProps={{ min: 1 }}
+                            />
+                          </Grid>
+                          <Grid item xs={6} sm={3}>
+                            <TextField
+                              fullWidth
+                              label="Price (SGD)"
+                              type="number"
+                              value={invoiceData.services[selectedCategoryName][sectionIndex].items[itemIndex].price}
+                              onChange={(e) => handleServiceChange(
+                                selectedCategoryName, 
+                                sectionIndex, 
+                                itemIndex, 
+                                'price', 
+                                e.target.value
+                              )}
+                              inputProps={{ min: 0, step: 0.01 }}
+                            />
+                          </Grid>
+                        </>
+                      )}
+                    </Grid>
+                  </ListItem>
+                ))}
+              </List>
+            </Paper>
+          ))}
+        </>
+      )}
+
+      {/* Payment Methods Section */}
+      <Typography variant="h6" gutterBottom>
+        Payment Methods
+      </Typography>
+      <Grid container spacing={2} sx={{ mb: 3 }}>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            label="PayNow Key"
+            value={invoiceData.paymentMethods.paynowKey}
+            onChange={(e) => setInvoiceData({
+              ...invoiceData,
+              paymentMethods: {
+                ...invoiceData.paymentMethods,
+                paynowKey: e.target.value
+              }
+            })}
+          />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            label="Internet Transfer"
+            value={invoiceData.paymentMethods.internetTransfer}
+            onChange={(e) => setInvoiceData({
+              ...invoiceData,
+              paymentMethods: {
+                ...invoiceData.paymentMethods,
+                internetTransfer: e.target.value
+              }
+            })}
+          />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            label="Cheque Payment"
+            value={invoiceData.paymentMethods.cheque}
+            onChange={(e) => setInvoiceData({
+              ...invoiceData,
+              paymentMethods: {
+                ...invoiceData.paymentMethods,
+                cheque: e.target.value
+              }
+            })}
+          />
+        </Grid>
+      </Grid>
+
+      {/* Terms & Conditions Section */}
+      <Typography variant="h6" gutterBottom>
+        Terms & Conditions
+      </Typography>
+      <Grid container spacing={2} sx={{ mb: 3 }}>
+        {Object.keys(invoiceData.terms).map((termKey) => (
+          <Grid item xs={12} key={termKey}>
+            <TextField
+              fullWidth
+              label={termKey.split(/(?=[A-Z])/).map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+              value={invoiceData.terms[termKey]}
+              onChange={(e) => setInvoiceData({
+                ...invoiceData,
+                terms: {
+                  ...invoiceData.terms,
+                  [termKey]: e.target.value
+                }
+              })}
+              multiline
+              rows={2}
+              placeholder={`Enter ${termKey} terms`}
+            />
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* Signatures Section */}
+      <Typography variant="h6" gutterBottom>
+        Signatures
+      </Typography>
+      <Paper sx={{ p: 2, mb: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Contractor Name"
+              value={invoiceData.signatures.contractor.name}
+              onChange={(e) => setInvoiceData({
+                ...invoiceData,
+                signatures: {
+                  ...invoiceData.signatures,
+                  contractor: {
+                    ...invoiceData.signatures.contractor,
+                    name: e.target.value
+                  }
+                }
+              })}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Contractor Signature URL"
+              value={invoiceData.signatures.contractor.signatureUrl}
+              onChange={(e) => setInvoiceData({
+                ...invoiceData,
+                signatures: {
+                  ...invoiceData.signatures,
+                  contractor: {
+                    ...invoiceData.signatures.contractor,
+                    signatureUrl: e.target.value
+                  }
+                }
+              })}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={invoiceData.signatures.customer.agreed}
+                  onChange={(e) => setInvoiceData({
+                    ...invoiceData,
+                    signatures: {
+                      ...invoiceData.signatures,
+                      customer: {
+                        ...invoiceData.signatures.customer,
+                        agreed: e.target.checked
+                      }
+                    }
+                  })}
+                  required
+                />
+              }
+              label="I agree to the terms and conditions"
+            />
+          </Grid>
+        </Grid>
+      </Paper>
+
+      {/* Notes Section */}
+      <TextField
+        fullWidth
+        label="Additional Notes"
+        value={invoiceData.notes}
+        onChange={(e) => setInvoiceData({
+          ...invoiceData,
+          notes: e.target.value
+        })}
+        multiline
+        rows={3}
+        sx={{ mb: 3 }}
+      />
+
+      {/* Status Selection */}
+      <Select
+        fullWidth
+        value={invoiceData.status}
+        onChange={(e) => setInvoiceData({
+          ...invoiceData,
+          status: e.target.value
+        })}
+        sx={{ mb: 3 }}
+      >
+        <MenuItem value="draft">Draft</MenuItem>
+        <MenuItem value="sent">Sent</MenuItem>
+        <MenuItem value="confirmed">Confirmed</MenuItem>
+        <MenuItem value="completed">Completed</MenuItem>
+        <MenuItem value="cancelled">Cancelled</MenuItem>
+      </Select>
+
+      {/* Totals Section */}
+      <Paper sx={{ p: 2, mb: 3 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Typography>Subtotal:</Typography>
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: 'right' }}>
+            <Typography>SGD {subTotal.toFixed(2)}</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography>GST (9%):</Typography>
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: 'right' }}>
+            <Typography>SGD {gst.toFixed(2)}</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="h6">Grand Total:</Typography>
+          </Grid>
+          <Grid item xs={6} sx={{ textAlign: 'right' }}>
+            <Typography variant="h6">SGD {grandTotal.toFixed(2)}</Typography>
+          </Grid>
+        </Grid>
+      </Paper>
+
+      {/* Action Buttons */}
+      <Stack direction="row" spacing={2} justifyContent="flex-end">
+        <Button
+          type="button"
+          variant="outlined"
+          color="error"
+          onClick={onClose}
+          disabled={submitting}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={submitting || !invoiceData.signatures.customer.agreed}
+          startIcon={submitting ? <CircularProgress size={20} /> : null}
+        >
+          {submitting ? "Creating..." : "Create Invoice"}
         </Button>
       </Stack>
 
-      {/* Save & Cancel */}
-      {selectedCategories.length > 0 && (
-        <Stack direction="row" justifyContent="flex-end" spacing={2}>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={() => console.log("Invoice Data:", data)}
-          >
-            Save
-          </Button>
-          <Button
-            type="button"
-            variant="outlined"
-            color="error"
-            onClick={onClose}
-          >
-            Cancel
-          </Button>
-        </Stack>
-      )}
-    </form>
+      {/* Error/Success Feedback */}
+      <Snackbar
+        open={!!error || success}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={success ? 'success' : 'error'}
+          sx={{ width: '100%' }}
+        >
+          {success ? 'Invoice created successfully!' : error}
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 }
 

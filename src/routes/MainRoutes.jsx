@@ -6,6 +6,7 @@ import React, { lazy } from 'react';
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../component/Loadable';
 import Invoice from 'views/Accounting/Invoice';
+import Summary from 'views/Summary/Summary';
 
 
 
@@ -69,6 +70,12 @@ const MainRoutes = {
       path: '/applications/Calendar',
       element: <Calendar />
     },
+
+      {
+      path:'/accounting/summary',
+      element:<Summary/>
+    },
+    
 
     {
       path:'/accounting/invoice',

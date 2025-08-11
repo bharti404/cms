@@ -138,6 +138,14 @@ export default {
                       children: [ 
 
                         {
+                          id:"accounting summary",
+                          title: "Summary",
+                          type: "item",
+                          url: '/accounting/summary',
+                          icon : icons["FolderOpenOutlinedIcon"],
+                        },
+
+                        {
                         id: "invoice" ,
                         title: "Invoice",
                         type: "item",
