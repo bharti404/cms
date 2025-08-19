@@ -7,6 +7,7 @@ import MainLayout from '../layout/MainLayout';
 import Loadable from '../component/Loadable';
 import Invoice from 'views/Accounting/Invoice';
 import Summary from 'views/Summary/Summary';
+import BookKeeping from 'views/Accounting/BookKeeping';
 
 
 
@@ -80,7 +81,13 @@ const MainRoutes = {
     {
       path:'/accounting/invoice',
       element:<Invoice/>
+    },
+
+     {
+      path:'/accounting/bookkeeping',
+      element:<BookKeeping/>
     }
+
     
 
   ]

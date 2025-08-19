@@ -152,6 +152,13 @@ export default {
                         url: '/accounting/invoice',
                         icon :  icons["CalendarMonthOutlinedIcon"]
                         },
+                         {
+                        id: "bookkeeping" ,
+                        title: "BookKeeping",
+                        type: "item",
+                        url: '/accounting/bookkeeping',
+                        icon :  icons["CalendarMonthOutlinedIcon"]
+                        },
                         {
                           id:"File manager",
                           title: "File manager",
